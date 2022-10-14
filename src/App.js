@@ -1,24 +1,37 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import IcPlay from "./assets/icons/ic_play.svg";
-import icSearch from "./assets/icons/ic_search.svg";
 import avatar from "./assets/images/avatar.png";
-import productFilm from "./assets/images/browse-1.png";
-
+import { useEffect, useState } from "react";
+import MovieList from "./MovieList";
 
 function App() {
+  const [movies, setMovies] = useState([]);
+
+  const getMovieRequest = async () => {
+    const url = `http://www.omdbapi.com/?s=star wars&apikey=5bba1f0e`;
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    }
+  };
+
+  useEffect(() => {
+    getMovieRequest();
+  }, []);
+
   return (
     <div className="mx-auto max-w-screen hidden lg:block">
-      <aside className="fixed z-50 w-[300px] h-full">
-        <div className="flex flex-col p-[30px] pr-0 border-r border-gray-[#F1F1F1] overflow-y-auto h-full">
-          <a href="/">
-            <h1>HELLO</h1>
-          </a>
-          <div className="links flex flex-col mt-[60px] h-full gap-[50px]">
+      <aside class="fixed z-50 w-[300px] h-full">
+        <div class="flex flex-col p-[30px] pr-0 border-r border-gray-[#F1F1F1] overflow-y-auto h-full">
+          <a href="/"></a>
+          <div class="links flex flex-col mt-[60px] h-full gap-[50px]">
             <div>
-              <div className="text-gray-1 text-sm mb-4">Menu</div>
-              <a href="/" className="side-link active">
+              <div class="text-gray-1 text-sm mb-4">Menu</div>
+              <a href="/" class="side-link active">
                 <svg
                   width="24"
                   height="24"
@@ -37,7 +50,7 @@ function App() {
                 </svg>
                 Discover
               </a>
-              <a href="#!" className="side-link">
+              <a href="#!" class="side-link">
                 <svg
                   width="24"
                   height="24"
@@ -53,7 +66,7 @@ function App() {
                 </svg>
                 Your Favorites
               </a>
-              <a href="#!" className="side-link">
+              <a href="#!" class="side-link">
                 <svg
                   width="24"
                   height="24"
@@ -69,7 +82,7 @@ function App() {
                 </svg>
                 Downloads
               </a>
-              <a href="#!" className="side-link mb-0">
+              <a href="#!" class="side-link mb-0">
                 <svg
                   width="24"
                   height="24"
@@ -86,9 +99,10 @@ function App() {
                 Messages (102)
               </a>
             </div>
+
             <div>
-              <div className="text-gray-1 side-link mb-4">Others</div>
-              <a href="pricing.html" className="side-link">
+              <div class="text-gray-1 side-link mb-4">Others</div>
+              <a href="pricing.html" class="side-link">
                 <svg
                   width="24"
                   height="24"
@@ -104,7 +118,7 @@ function App() {
                 </svg>
                 Payments
               </a>
-              <a href="#!" className="side-link">
+              <a href="#!" class="side-link">
                 <svg
                   width="24"
                   height="24"
@@ -121,7 +135,7 @@ function App() {
                 </svg>
                 Analytics
               </a>
-              <a href="#!" className="side-link">
+              <a href="#!" class="side-link">
                 <svg
                   width="24"
                   height="24"
@@ -137,7 +151,7 @@ function App() {
                 </svg>
                 Your Profile
               </a>
-              <a href="sign_in.html" className="side-link mb-0">
+              <a href="sign_in.html" class="side-link mb-0">
                 <svg
                   width="24"
                   height="24"
@@ -154,15 +168,15 @@ function App() {
                 Logout
               </a>
             </div>
-            <div className="mt-auto pr-[30px]">
-              <div className="p-5 bg-black rounded-[25px]">
+            <div class="mt-auto pr-[30px]">
+              <div class="p-5 bg-black rounded-[25px]">
                 <img src="assets/icons/ic_star-rounded.svg" alt="" />
-                <div className="text-white text-lg font-semibold mt-4 mb-8">
+                <div class="text-white text-lg font-semibold mt-4 mb-8">
                   For Greatest
                 </div>
-                <div className="text-white text-sm mb-2">12 of 30 hari</div>
-                <div className="rounded-full w-full h-[6px] bg-[#333333]">
-                  <div className="rounded-full h-full w-9/12 bg-alerange"></div>
+                <div class="text-white text-sm mb-2">12 of 30 hari</div>
+                <div class="rounded-full w-full h-[6px] bg-[#333333]">
+                  <div class="rounded-full h-full w-9/12 bg-alerange"></div>
                 </div>
               </div>
             </div>
@@ -214,145 +228,44 @@ function App() {
               </div>
             </div>
           </div>
-        <div>
-          <div class="font-semibold text-[22px] text-black mb-4">Browse</div>
-          <div class="__scroll-selector">
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">Meong Golden</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">
-                    Horror • Love
-                  </p>
-                </div>
+          <div>
+            <div class="font-semibold text-[22px] text-black mb-4">Browse</div>
+            <div class="__scroll-selector">
+              {/* <MovieList movies={movies} /> */}
+              {/* <div class="relative group overflow-hidden mr-[30px]"> */}
+              {/* <MovieList movies={movies} /> */}
+              {/* </div> */}
+
+              <div className="grid gap-4 grid-cols-4 grid-rows-3">
+                <MovieList movies={movies} />
               </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
+
+              {/* <div class="relative group overflow-hidden mr-[30px]">
                 <img
-                  src={IcPlay}
-                  class=""
-                  width="50"
+                  src={productFilm}
+                  class="object-cover rounded-[30px] h-[340px] w-[250px]"
                   alt=""
                 />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
-            </div>
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">Strange</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">2022</p>
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
+                  <div class="px-7 pb-7">
+                    <div class="font-medium text-xl text-white">
+                      The Last of Us
+                    </div>
+                    <p class="mb-0 text-gray-300 text-base mt-[10px]">
+                      Horror • Love
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
-                <img src={IcPlay} width="50" alt="" />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
-            </div>
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">Fornite</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">2022</p>
+                <div
+                  class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
+                                              -translate-x-1/2 z-20 transition ease-in-out duration-500"
+                >
+                  <img src={IcPlay} class="" width="50" alt="" />
                 </div>
-              </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
-                <img src={IcPlay} width="50" alt="" />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
-            </div>
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">King's Queen</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">2022</p>
-                </div>
-              </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
-                <img src={IcPlay} width="50" alt="" />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
-            </div>
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">Morbius</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">2022</p>
-                </div>
-              </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
-                <img src={IcPlay} width="50" alt="" />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
-            </div>
-            <div class="relative group overflow-hidden mr-[30px]">
-              <img
-                src={productFilm}
-                class="object-cover rounded-[30px] h-[340px] w-[250px]"
-                alt=""
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
-                <div class="px-7 pb-7">
-                  <div class="font-medium text-xl text-white">Meong Golden</div>
-                  <p class="mb-0 text-gray-300 text-base mt-[10px]">
-                    Horror • Love
-                  </p>
-                </div>
-              </div>
-              <div
-                class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
-                                -translate-x-1/2 z-20 transition ease-in-out duration-500"
-              >
-                <img
-                  src={IcPlay}
-                  class=""
-                  width="50"
-                  alt=""
-                />
-              </div>
-              <a href="watching.html" class="inset-0 absolute z-50"></a>
+                <a href="watching.html" class="inset-0 absolute z-50"></a>
+              </div> */}
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

@@ -1,14 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-
-.flex::before,
-.flex::after {
-    display: none !important;
-}
-
 @layer components{
     .side-link{
         @apply flex items-center font-normal text-black text-sm w-full mb-5 gap-3 transition-all;
