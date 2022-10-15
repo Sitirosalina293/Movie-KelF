@@ -1,6 +1,6 @@
 import React from "react";
-import "./App.css";
-import IcPlay from "./assets/icons/ic_play.svg";
+import "../App.css";
+import IcPlay from "../assets/icons/ic_play.svg";
 
 const MovieList = (props) => {
   return (

@@ -3,7 +3,8 @@ import "./App.css";
 
 import avatar from "./assets/images/avatar.png";
 import { useEffect, useState } from "react";
-import MovieList from "./MovieList";
+import MovieList from "./components/MovieList";
+// import MovieList from "./MovieList";
 
 function App() {
   const [movies, setMovies] = useState([]);
