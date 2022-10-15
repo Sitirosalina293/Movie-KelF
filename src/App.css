@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .flex::before,
 .flex::after {
     display: none !important;
@@ -30,4 +28,12 @@
         w-full max-w-[570px] focus:outline-none focus:ring-2 transition-all bg-no-repeat bg-center
         bg-[center_right_20px];
     }
+}
+
+.movie-title{
+    color: black;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 5px;
 }
