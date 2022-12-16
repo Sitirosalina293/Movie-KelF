@@ -1,5 +1,5 @@
 
-import ErrorBox from 'parts/ErrorBox';
+import ErrorBox from '../parts/ErrorBox';
 
 const CustomError = () => (
   <ErrorBox />
